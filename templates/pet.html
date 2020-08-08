@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Adoption Agency{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1 class="display-1 text-center">{{pet.name}}</h1>
+    <div class="row justify-content-center">
+        <div class="row align-items-center col-md-8">
+        <div class="col-md-6">
+        <img src="{{pet.photo_url}}" alt="{{pet.name}}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+        <ul>
+            <li>Species: {{pet.species}}</li>
+            <li>Age: {{pet.age}}</li>
+            <li>Notes: {{pet.notes}}</li>
+        </ul>
+        </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="POST">
+          {{ form.hidden_tag() }}
+
+
+
+          {% for field in form if field.widget.input_type != 'hidden'%}
+          <div class="form-group">
+            {{field.label}}
+            {{field(class_="form-control")}}
+            {% for err in field.errors %}
+            <small class="form-text text-danger">
+              {{err}}
+            </small>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <button class="btn  btn-success  btn-lg">Update</button>
+          <a href="/" class="btn btn-danger btn-lg">Go Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+    
